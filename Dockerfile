@@ -10,6 +10,7 @@ RUN make -j 12 -fwin32/Makefile.gcc \
     INCLUDE_PATH=include \
     LIBRARY_PATH=lib \
     BINARY_PATH=bin \
+    SHARED_MODE=1 \
     install \
     && rm -rf /root/zlib
 
@@ -27,7 +28,7 @@ RUN try-build
 
 COPY leptonica /root/leptonica
 WORKDIR /root/leptonica
-RUN try-build --without-libwebp --without-libopenjpeg --without-zlib --without-libpng
+RUN try-build --without-libwebp --without-libopenjpeg
 
 COPY tesseract /root/tesseract
 WORKDIR /root/tesseract
