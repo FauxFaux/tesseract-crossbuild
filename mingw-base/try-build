@@ -1,0 +1,17 @@
+#!/bin/bash
+set -eux
+
+if [ -x autogen.sh ]; then
+    ./autogen.sh
+else
+    autoreconf -fvi
+fi
+
+ROOT=$HOME/.cache/w32/
+mkdir -p $ROOT
+
+export PKG_CONFIG_PATH=$ROOT/lib/pkgconfig
+./configure --host=i686-w64-mingw32 --prefix=$ROOT "$@"
+make -j 12
+make install
+
